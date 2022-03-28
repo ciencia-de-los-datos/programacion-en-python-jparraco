@@ -13,7 +13,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
-def pregunta_01():
+def pregunta_01(suma):
     """
     Retorne la suma de la segunda columna.
 
@@ -21,7 +21,8 @@ def pregunta_01():
     214
 
     """
-    return
+    return suma
+print(pregunta_01(214))
 
 
 def pregunta_02():
