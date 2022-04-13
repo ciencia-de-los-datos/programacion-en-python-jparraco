@@ -11,7 +11,12 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
+import csv
+with open ("data.csv", "r") as file:
+  datos_lab= file.readlines()
+datos_lab= [line.replace("\n", "") for line in datos_lab] 
+datos_lab=[line.replace("\t", ",") for line in datos_lab]
+datos_lab= [line.split(",") for line in datos_lab]
 
 def pregunta_01():
     """
@@ -21,8 +26,13 @@ def pregunta_01():
     214
 
     """
-    suma = 214
-    return 214
+    suamtoria =[]
+for i in range(len(datos_lab)):
+  elemento_a_sumar =(int(datos_lab[i][1]))
+  i+=1
+  sumatoria.append(elemento_a_sumar)
+sum(sumatoria)
+    return sum(sumatoria)
 
 
 def pregunta_02():
@@ -40,7 +50,15 @@ def pregunta_02():
     ]
 
     """
-    return
+    lista_letras =[]
+for i in range(len(datos_lab)):
+  elemento_a_addicionar = datos_lab[i][0]
+  i+=1
+  lista_letras.append(elemento_a_addicionar)
+conj_letras= set(lista_letras)
+for elemento in sorted(conj_letras):
+  clave = (f"{elemento},{lista_letras.count(elemento)}")
+    return clave
 
 
 def pregunta_03():
