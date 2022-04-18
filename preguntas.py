@@ -11,13 +11,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-import csv
-with open ("data.csv", "r") as file:
-  datos_lab= file.readlines()
-datos_lab= [line.replace("\n", "") for line in datos_lab] 
-datos_lab=[line.replace("\t", ",") for line in datos_lab]
-datos_lab= [line.split(",") for line in datos_lab]
-
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
