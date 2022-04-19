@@ -19,12 +19,17 @@ def pregunta_01():
     214
 
     """
+    with open("data.csv", "r") as file:
+        datos_dos=file.readlines()
+    datos_dos=[line.replace("\n","")for line in datos_dos]
+    datos_dos=[line.split("\t")for line in datos_dos]
     sumatoria =[]
-    for i in range(0,len(datos_lab)):
-        elemento_a_sumar =(int(datos_lab[i][1]))
+    for i in range(0,len(datos_dos)):
+        elemento_a_sumar =(int(datos_dos[i][1]))
         sumatoria.append(elemento_a_sumar)
-    suma=sum(sumatoria)
+        suma=sum(sumatoria)
     return suma
+
 
 
 def pregunta_02():
@@ -53,8 +58,6 @@ def pregunta_02():
     x=0
     y=0
     tupla=[(x,lista_columna0.count(x))for x in id]
-
-
     return tupla
 
 
@@ -155,7 +158,7 @@ def pregunta_05():
                 valores.append(x[1])
         tupla4.append((y,max(valores),min(valores)))
         valores.clear()
-        return tupla4
+    return tupla4
     
 
 
@@ -263,7 +266,24 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open("data.csv","r")as file:
+        datos_8=file.readlines()
+    datos_8=[line.replace("\n","")for line in datos_8]
+    datos_8=[line.split("\t")for line in datos_8]
+    
+    lista_datos=[(int(x[1]),x[0]) for x in datos_8]
+    
+    numeros=sorted(set(x[0]for x in lista_datos))
+    
+    tupla7=[]
+    letras=[]
+    for y in numeros:
+        for x in lista_datos:
+            if x[0]-y==0:
+                letras.append(x[1])
+        tupla7.append((y,sorted(set(letras))))
+        letras=[]
+    return tupla7
 
 
 def pregunta_09():
@@ -286,7 +306,19 @@ def pregunta_09():
     }
 
     """
-    return
+    with open("data.csv", "r")as file:
+        datos_9= file.readlines()
+    datos_9=[line.replace("\n","")for line in datos_9]
+    datos_9=[line.split("\t") for line in datos_9]
+    datos_9=[line[4].split(",") for line in datos_9]
+  
+    lista_clave=[(y[:3])for x in datos_9 for y in x]
+
+    keys_dict=sorted(set(elem for elem in lista_clave))
+   
+    tupla8=[(x,lista_clave.count(x))for x in keys_dict]
+    dict1=dict(tupla8)
+    return tupla8
 
 
 def pregunta_10():
@@ -307,7 +339,16 @@ def pregunta_10():
 
 
     """
-    return
+    with open("data.csv", "r")as file:
+        datos_10=file.readlines()
+    datos_10=[line.replace("\n", "")for line in datos_10]
+    datos_10=[line.split("\t")for line in datos_10]
+    anc_col4=[len(line[3].split(","))for line in datos_10]
+    anc_col5=[len(line[4].split(","))for line in datos_10]
+    colu1=[(line[0])for line in datos_10]
+    data_base=list(zip(colu1,anc_col4,anc_col5))
+    
+    return data_base
 
 
 def pregunta_11():
@@ -328,7 +369,36 @@ def pregunta_11():
 
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datos11=file.readlines()
+    datos11=[f.replace("\n","")for f in datos11]
+    datos11=[f.split("\t") for f in datos11]
+    col4=[f[3].split(",")for f in datos11]
+    col1=[int(f[1]) for f in datos11]
+    datos_letras_numero=list(zip(col4,col1))
+    lista_letra_num=[]
+    c=0
+    for elem in datos_letras_numero:
+        for y in elem[c]:
+            lista_letra_num.append((y,elem[1]))
+            c += 1
+        c=0
+    
+    #Creo el diccionario
+    dict2={}
+    for llave,valor in lista_letra_num:
+        if llave in dict2.keys():
+            dict2[llave] +=valor
+        else:
+            dict2[llave] =valor
+    sorted_keys=sorted(dict2)
+    dict2_sort={}
+    for x in sorted_keys:
+        dict2_sort[x]=dict2[x]
+
+
+    return dict2_sort
+   
 
 
 def pregunta_12():
@@ -346,4 +416,20 @@ def pregunta_12():
     }
 
     """
-    return
+    with open("data.csv", "r")as file:
+        datos_12=file.readlines()
+    datos_12=[line.replace("\n","")for line in datos_12]
+    datos_12=[line.split("\t")for line in datos_12]
+    columna5=[line[4].split(",")for line in datos_12]
+    columna1=[line[0]for line in datos_12]
+    columna5_columna1=list(zip(columna1,columna5))
+    dic3_keys=sorted(set(columna1))
+    dic3={}
+    for llave in dic3_keys:
+        dic3[llave]=0
+    for x, y in columna5_columna1:
+        for z in y:
+            dic3[x]+=int(z[4:])
+    
+
+    return dic3
