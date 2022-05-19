@@ -318,7 +318,7 @@ def pregunta_09():
    
     tupla8=[(x,lista_clave.count(x))for x in keys_dict]
     dict1=dict(tupla8)
-    return tupla8
+    return dict1
 
 
 def pregunta_10():
