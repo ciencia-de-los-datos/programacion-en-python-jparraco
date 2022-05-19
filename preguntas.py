@@ -11,8 +11,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
-
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -21,7 +19,17 @@ def pregunta_01():
     214
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datos_dos=file.readlines()
+    datos_dos=[line.replace("\n","")for line in datos_dos]
+    datos_dos=[line.split("\t")for line in datos_dos]
+    sumatoria =[]
+    for i in range(0,len(datos_dos)):
+        elemento_a_sumar =(int(datos_dos[i][1]))
+        sumatoria.append(elemento_a_sumar)
+        suma=sum(sumatoria)
+    return suma
+
 
 
 def pregunta_02():
@@ -39,7 +47,18 @@ def pregunta_02():
     ]
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datos_dos=file.readlines()
+    datos_dos=[line.replace("\n","")for line in datos_dos]
+    datos_dos=[line.split("\t")for line in datos_dos]
+    x=0
+    lista_columna0=[]
+    lista_columna0=[x[0] for x in datos_dos]
+    id=sorted(set(lista_columna0))
+    x=0
+    y=0
+    tupla=[(x,lista_columna0.count(x))for x in id]
+    return tupla
 
 
 def pregunta_03():
@@ -57,7 +76,23 @@ def pregunta_03():
     ]
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datos_3=file.readlines()
+    datos_3=[line.replace("\n","")for line in datos_3]
+    datos_3=[line.split("\t")for line in datos_3]
+    list_columnas= [[x[0],int(x[1])] for x in datos_3 ]
+    list_id=sorted(set([x[0] for x in datos_3]))
+    c=0
+    tupla2=[]
+    for y in list_id:
+        for x in list_columnas:
+            if x[0]== y:
+                c+= x[1]
+      
+        tupla2.append((y,c)) 
+        c=0
+
+    return tupla2
 
 
 def pregunta_04():
@@ -82,7 +117,16 @@ def pregunta_04():
     ]
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datos_4=file.readlines()
+        datos_4=[line.replace("\n", "")for line in datos_4]
+        datos_4=[line.split("\t") for line in datos_4]
+    list_fechas=[line[2].split("-")for line in datos_4]
+    list_meses=[line[1]for line in list_fechas]
+    meses=sorted(set([line for line in list_meses]))
+    tupla4=[(x,list_meses.count(x))for x in meses]      
+    return tupla4
+
 
 
 def pregunta_05():
@@ -100,7 +144,22 @@ def pregunta_05():
     ]
 
     """
-    return
+    with open("data.csv","r")as file:
+        datos_5=file.readlines()
+    datos_5=[line.replace("\n","")for line in datos_5]
+    datos_5=[line.split("\t")for line in datos_5]
+    id_list=sorted(set([lines[0]for lines in datos_5]))
+    lista_datos5=[(line[0],int(line[1]))for line in datos_5]
+    valores=[]
+    tupla4=[]
+    for y in id_list:
+        for x in lista_datos5:
+            if x[0]==y:
+                valores.append(x[1])
+        tupla4.append((y,max(valores),min(valores)))
+        valores.clear()
+    return tupla4
+    
 
 
 def pregunta_06():
@@ -125,7 +184,23 @@ def pregunta_06():
     ]
 
     """
-    return
+    with open("data.csv", "r")as file:
+            datos_6=file.readlines()
+    datos_6=[line.replace("\n","")for line in datos_6]
+    datos_6=[line.split("\t")for line in datos_6]
+    datos_6=[line[4].split(",")for line in datos_6]
+    lista_clave_valor=[(y[:3],int(y[4:]))for x in datos_6 for y in x]
+    keys_dict=sorted(set(elem[0]for elem in lista_clave_valor))
+    valores=[]
+    tupla5=[]
+    for clave in keys_dict:
+        for elem in lista_clave_valor:
+            if elem[0]==clave:
+                valores.append(elem[1])
+        tupla5.append((clave,min(valores),max(valores)))
+        valores.clear()
+    return tupla5
+    
 
 
 def pregunta_07():
@@ -149,7 +224,24 @@ def pregunta_07():
     ]
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datos_7=file.readlines()
+    datos_7=[line.replace("\n","")for line in datos_7]
+    datos_7=[line.split("\t")for line in datos_7]
+        #creo una lista de datos con elementoscolumna 1 y 2
+    lista_datos=[(int(x[1]),x[0])for x in datos_7]
+    #extraigo el conjunto numeros unicos ordenados en la columna 2 de los datos
+    numeros=sorted(set(x[0]for x in lista_datos))
+    tupla6=[]
+    letras=[]
+    #para cada nuemero extraigo la lista de letras que aparecen en la lista de datos
+    for y in numeros:
+        for x in lista_datos:
+            if x[0]-y==0:
+                letras.append(x[1])
+        tupla6.append((y,letras))
+        letras=[]
+    return  tupla6
 
 
 def pregunta_08():
@@ -174,7 +266,24 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open("data.csv","r")as file:
+        datos_8=file.readlines()
+    datos_8=[line.replace("\n","")for line in datos_8]
+    datos_8=[line.split("\t")for line in datos_8]
+    
+    lista_datos=[(int(x[1]),x[0]) for x in datos_8]
+    
+    numeros=sorted(set(x[0]for x in lista_datos))
+    
+    tupla7=[]
+    letras=[]
+    for y in numeros:
+        for x in lista_datos:
+            if x[0]-y==0:
+                letras.append(x[1])
+        tupla7.append((y,sorted(set(letras))))
+        letras=[]
+    return tupla7
 
 
 def pregunta_09():
@@ -197,7 +306,19 @@ def pregunta_09():
     }
 
     """
-    return
+    with open("data.csv", "r")as file:
+        datos_9= file.readlines()
+    datos_9=[line.replace("\n","")for line in datos_9]
+    datos_9=[line.split("\t") for line in datos_9]
+    datos_9=[line[4].split(",") for line in datos_9]
+  
+    lista_clave=[(y[:3])for x in datos_9 for y in x]
+
+    keys_dict=sorted(set(elem for elem in lista_clave))
+   
+    tupla8=[(x,lista_clave.count(x))for x in keys_dict]
+    dict1=dict(tupla8)
+    return dict1
 
 
 def pregunta_10():
@@ -218,7 +339,16 @@ def pregunta_10():
 
 
     """
-    return
+    with open("data.csv", "r")as file:
+        datos_10=file.readlines()
+    datos_10=[line.replace("\n", "")for line in datos_10]
+    datos_10=[line.split("\t")for line in datos_10]
+    anc_col4=[len(line[3].split(","))for line in datos_10]
+    anc_col5=[len(line[4].split(","))for line in datos_10]
+    colu1=[(line[0])for line in datos_10]
+    data_base=list(zip(colu1,anc_col4,anc_col5))
+    
+    return data_base
 
 
 def pregunta_11():
@@ -239,7 +369,36 @@ def pregunta_11():
 
 
     """
-    return
+    with open("data.csv", "r") as file:
+        datos11=file.readlines()
+    datos11=[f.replace("\n","")for f in datos11]
+    datos11=[f.split("\t") for f in datos11]
+    col4=[f[3].split(",")for f in datos11]
+    col1=[int(f[1]) for f in datos11]
+    datos_letras_numero=list(zip(col4,col1))
+    lista_letra_num=[]
+    c=0
+    for elem in datos_letras_numero:
+        for y in elem[c]:
+            lista_letra_num.append((y,elem[1]))
+            c += 1
+        c=0
+    
+    #Creo el diccionario
+    dict2={}
+    for llave,valor in lista_letra_num:
+        if llave in dict2.keys():
+            dict2[llave] +=valor
+        else:
+            dict2[llave] =valor
+    sorted_keys=sorted(dict2)
+    dict2_sort={}
+    for x in sorted_keys:
+        dict2_sort[x]=dict2[x]
+
+
+    return dict2_sort
+   
 
 
 def pregunta_12():
@@ -257,4 +416,20 @@ def pregunta_12():
     }
 
     """
-    return
+    with open("data.csv", "r")as file:
+        datos_12=file.readlines()
+    datos_12=[line.replace("\n","")for line in datos_12]
+    datos_12=[line.split("\t")for line in datos_12]
+    columna5=[line[4].split(",")for line in datos_12]
+    columna1=[line[0]for line in datos_12]
+    columna5_columna1=list(zip(columna1,columna5))
+    dic3_keys=sorted(set(columna1))
+    dic3={}
+    for llave in dic3_keys:
+        dic3[llave]=0
+    for x, y in columna5_columna1:
+        for z in y:
+            dic3[x]+=int(z[4:])
+    
+
+    return dic3
